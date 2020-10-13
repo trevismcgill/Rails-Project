@@ -1,2 +1,6 @@
 Rails App
 
+Assocations
+User has many characters and many campaigns through characters
+Characters belong to a single user, but could belong to multiple campaigns?
+Campaigns have many characters and many users through characters
