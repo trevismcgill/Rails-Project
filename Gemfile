@@ -43,3 +43,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'better_errors'
 gem 'pry-byebug'
+gem 'omniauth'
+gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
+gem 'dotenv-rails'
