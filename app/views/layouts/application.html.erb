@@ -17,12 +17,13 @@
     <% end %>
   </head>
   
-    <% flash.each do |type, msg| %>
-    <% binding.pry %>
-  <div>
-    <%= msg.each {|error| error} %>
-  </div>
-<% end %>
+    <% flash.keys.each do |key| %>
+      <div>
+      <% flash[key].to_a.each do |error| %>
+        <%= error %>
+      <% end %>
+      </div>
+    <% end %>
 
 
 
