@@ -8,7 +8,7 @@ class UsersController < ApplicationController
         if @user.id
             redirect_to user_path(@user)
         else
-            flash.alert = "Something went wrong!"
+            flash.alert = @user.errors.full_messages
             redirect_to new_user_path
         end
     end

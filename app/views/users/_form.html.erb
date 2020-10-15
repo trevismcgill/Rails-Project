@@ -15,5 +15,5 @@
     <br>
     <%= check_box(:user, :dungeon_master) %>
     <br>
-    <%= submit_tag "Sign Up" %>
+    <%= submit_tag @user.persisted? ? "Update" : "Sign Up" %>
 <% end %>

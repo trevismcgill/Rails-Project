@@ -17,9 +17,10 @@
     <% end %>
   </head>
   
-  <% flash.each do |type, msg| %>
+    <% flash.each do |type, msg| %>
+    <% binding.pry %>
   <div>
-    <%= msg %>
+    <%= msg.each {|error| error} %>
   </div>
 <% end %>
 
