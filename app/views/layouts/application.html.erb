@@ -17,12 +17,10 @@
     <% end %>
   </head>
   
-    <% flash.keys.each do |key| %>
-      <div>
-      <% flash[key].to_a.each do |error| %>
-        <%= error %>
+    <% if flash.keys.any? %>
+      <% flash[:alert].each do |msg| %>
+        <h5><%= msg %></h5>
       <% end %>
-      </div>
     <% end %>
 
 

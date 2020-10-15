@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   end
 
   resources :campaigns do
-    resources :character, only: [:index, :show]
+    resources :characters, only: [:index, :show]
   end
 
   resources :characters

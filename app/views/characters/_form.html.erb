@@ -1,0 +1,19 @@
+<%= form_with model: @character do %>
+    <%= label_tag(:name, "Name" ) %>
+    <br>
+    <%= text_field(:character, :name) %>
+    <br>
+    <%= label_tag(:race, "Race") %>
+    <br>
+    <%= select(:character, :race, @race_options) %>
+    <br>
+    <%= label_tag(:class, "Class") %>
+    <br>
+    <%= select(:character, :character_class, @class_options) %>
+    <br>
+    <%= label_tag(:level, "Level") %>
+    <br>
+    <%= select(:character, :level, @level_options) %>
+    <br>
+    <%= submit_tag @character.persisted? ? "Edit Character" : "Create Character" %>
+<% end %>
