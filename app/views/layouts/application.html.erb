@@ -17,10 +17,12 @@
     <% end %>
   </head>
   
-    <% if flash.keys.any? %>
+    <% if flash[:alert].kind_of?(Array) %>
       <% flash[:alert].each do |msg| %>
         <h5><%= msg %></h5>
       <% end %>
+    <% else %>
+      <h5><%= flash[:alert] %> </h5>
     <% end %>
 
 
