@@ -1,10 +1,10 @@
 class CharactersController < ApplicationController
+    helper_method :character_owner
+    
     def new
         if logged_in?
             @character = Character.new
-            @race_options = ["Aasimar", "Dragonborn", "Dwarf", "Elf", "Gnome", "Halfing", "Half-Elf", "Half-Orc", "Human", "Orc", "Tiefling"]
-            @class_options = ["Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Paladin", "Monk", "Ranger", "Rouge", "Sorceror", "Warlock", "Wizard" ]
-            @level_options = (1..20)
+            character_options
         else
             flash.alert = "You must be logged in!"
             redirect_to login_path
@@ -23,17 +23,18 @@ class CharactersController < ApplicationController
     end
     
     def edit
-        if logged_in?
-            @character = Character.find_by_id(params[:id])
-        else
-            flash.alert = "You must be logged in!"
-            redirect_to login_path
+        @character = Character.find_by_id(params[:id])
+        if character_owner
+            character_options
+        else 
+            flash.alert = "That is not your character!"
+            redirect_to user_characters_path(current_user)
         end
     end
 
     def update
         @character = Character.find_by_id(params[:id])
-        if @character.user_id == current_user.id
+        if character_owner
             @character.assign_attributes(character_params)
             if @character.valid?
                 @character.update(character_params)
@@ -57,7 +58,7 @@ class CharactersController < ApplicationController
 
     def destroy
         @character = Character.find_by_id(params[:id])
-        if @character.user_id == current_user.id
+        if character_owner
             @character.destroy
             redirect_to user_characters_path(current_user)
         else
@@ -70,5 +71,15 @@ class CharactersController < ApplicationController
 
     def character_params
         params.require(:character).permit(:name, :race, :character_class, :level)
+    end
+
+    def character_options
+        @race_options = ["Aasimar", "Dragonborn", "Dwarf", "Elf", "Gnome", "Halfing", "Half-Elf", "Half-Orc", "Human", "Orc", "Tiefling"]
+        @class_options = ["Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Paladin", "Monk", "Ranger", "Rouge", "Sorceror", "Warlock", "Wizard" ]
+        @level_options = (1..20)
+    end
+
+    def character_owner
+        @character.user_id == current_user.id
     end
 end
