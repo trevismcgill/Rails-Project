@@ -1,1 +1,9 @@
-Hello <%= @user.username %>!
+<h1>Hello <%= @user.username %>!</h1>
+
+Characters - <%= @user.characters %>
+
+Campaigns - <%= @user.campaigns %>
+<br>
+
+<%= link_to "Create a Character", new_character_path %>
+

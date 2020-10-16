@@ -3,7 +3,7 @@ class CharactersController < ApplicationController
         if logged_in?
             @character = Character.new
             @race_options = ["Aasimar", "Dragonborn", "Dwarf", "Elf", "Gnome", "Halfing", "Half-Elf", "Half-Orc", "Human", "Orc", "Tiefling"]
-            @class_options = ["Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Paladin", "Monk", "Ranger", "Rouge" "Sorceror", "Warlock", "Wizard" ]
+            @class_options = ["Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Paladin", "Monk", "Ranger", "Rouge", "Sorceror", "Warlock", "Wizard" ]
             @level_options = (1..20)
         else
             flash.alert = "You must be logged in!"
@@ -15,7 +15,7 @@ class CharactersController < ApplicationController
         @character = Character.new(character_params)
         @character[:user_id] = current_user.id
         if @character.save
-            redirect_to character_path
+            redirect_to user_character_path(current_user, @character)
         else
             flash.alert = @character.errors.full_messages
             redirect_to new_character_path
@@ -34,11 +34,17 @@ class CharactersController < ApplicationController
     def update
         @character = Character.find_by_id(params[:id])
         if @character.user_id == current_user.id
-            @character.update(character_params)
-            redirect_to character_path
+            @character.assign_attributes(character_params)
+            if @character.valid?
+                @character.update(character_params)
+                redirect_to user_character_path(current_user, @character)
+            else
+                flash.alert = @character.errors.full_messages
+            end
         else
             flash.alert = "This is not your character!"
-            redirect_to login_path
+            redirect_to characters_path
+        end
     end
 
     def index
@@ -51,7 +57,13 @@ class CharactersController < ApplicationController
 
     def destroy
         @character = Character.find_by_id(params[:id])
-        @character.destroy
+        if @character.user_id == current_user.id
+            @character.destroy
+            redirect_to user_characters_path(current_user)
+        else
+            flash.alert = "This is not your character!"
+            redirect_to characters_path
+        end
     end
 
     private
@@ -59,5 +71,4 @@ class CharactersController < ApplicationController
     def character_params
         params.require(:character).permit(:name, :race, :character_class, :level)
     end
-
 end

@@ -1,0 +1,14 @@
+
+    <h1><%= @character.name %>, the <%= "#{@character.race} #{@character.character_class}" %></h1>
+
+    Level - <%= @character.level %>
+    <br>
+
+    Campaigns - 
+    <br>
+
+    Player - <%= @character.user.username %>
+
+    <%= button_to 'Edit', { controller: :characters, action: :edit}, method: :get %>
+
+    <%= button_to 'Destroy', { controller: :characters, action: :destroy}, method: :delete, data: { confirm: 'Are you sure?' } %>
