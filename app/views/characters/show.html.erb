@@ -8,7 +8,10 @@
     <br>
 
     Player - <%= @character.user.username %>
+    <br>
 
+    <% if character_owner %>
     <%= button_to 'Edit', { controller: :characters, action: :edit}, method: :get %>
 
     <%= button_to 'Destroy', { controller: :characters, action: :destroy}, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
