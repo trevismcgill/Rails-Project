@@ -13,3 +13,26 @@
  */
 
  @import "bootstrap";
+
+.navbar { 
+     background:gray;
+}
+
+.navbar-brand {
+    margin-left: 15px;
+}
+
+.nav-link , .navbar-brand{ color: #f4f4f4; cursor: pointer;}
+
+.nav-link{ margin-right: 1em !important;}
+
+.nav-link:hover{ background: #f4f4f4; color: gray; }
+
+.navbar-collapse{ justify-content: flex-end;}
+
+.navbar-toggler{  background:#fff !important;}
+
+body {
+    padding-top: 50px;
+    margin: 15px;
+}

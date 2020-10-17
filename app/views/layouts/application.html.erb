@@ -8,14 +8,33 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <% if logged_in? %>
-      <%= link_to "Logout", logout_path, method: 'delete'%>
+  <!-- navbar -->  
+ <nav class="navbar navbar-expand-lg fixed-top ">  
+ <a class="navbar-brand" href="#">Home</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">  
+ <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse " id="navbarSupportedContent">     <ul class="navbar-nav mr-4">
+ <li class="nav-item">
+     <a class="nav-link" data-value="characters" href="<%=characters_path%>">Characters</a>        </li>  
+<li class="nav-item">
+    <a class="nav-link " data-value="campaigns" href="<%=campaigns_path%>">Campaigns</a>    
+</li>
+<li class="nav-item">
+  <% if logged_in? %>
+      <a class="nav-link "  <%= link_to "My Page", user_path(current_user) %> </a>
+      </li>
+      <a class="nav-link "  <%= link_to "Logout", logout_path, method: 'delete'%> </a>
     <% else %>
-      <%= link_to "Sign Up", new_user_path %>
-      <%= link_to "Login", login_path %>
-      <%= link_to "Login via Github", '/auth/github' %>
+      <a class="nav-link "  <%= link_to "Sign Up", new_user_path %> </a>
+      </li>
+      <a class="nav-link "  <%= link_to "Login", login_path %> </a>
+      </li>
+      <a class="nav-link "  <%= link_to "Login via Github", '/auth/github' %> </a>
     <% end %>
-  </head>
+</li>
+</div></nav>
+</head>
   
     <% if flash[:alert].kind_of?(Array) %>
       <% flash[:alert].each do |msg| %>
