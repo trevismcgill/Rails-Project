@@ -1,5 +1,5 @@
 class Character < ApplicationRecord
-    has_many :campaigns
-    has_many :users, through: :campaigns
+    belongs_to :user
+    belongs_to :campaigns, optional: true
     validates_presence_of :name, :race, :character_class, :level
 end

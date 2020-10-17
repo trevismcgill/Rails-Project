@@ -5,6 +5,8 @@ class CreateCharacters < ActiveRecord::Migration[6.0]
       t.string :character_class
       t.string :race
       t.integer :level
+      t.integer :user_id
+      t.integer :campaign_id
       
       t.timestamps
     end
