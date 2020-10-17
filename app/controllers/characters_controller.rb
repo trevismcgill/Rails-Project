@@ -24,7 +24,7 @@ class CharactersController < ApplicationController
     
     def edit
         @character = Character.find_by_id(params[:id])
-        # if character_owner
+        # if character_owner?
             character_options
         else 
             flash.alert = "That is not your character!"
@@ -34,7 +34,7 @@ class CharactersController < ApplicationController
 
     def update
         @character = Character.find_by_id(params[:id])
-        # if character_owner
+        # if character_owner?
             @character.assign_attributes(character_params)
             if @character.valid?
                 @character.update(character_params)
@@ -55,7 +55,6 @@ class CharactersController < ApplicationController
         else
             @characters = Character.all
         end
-        
     end
 
     def show
@@ -85,7 +84,7 @@ class CharactersController < ApplicationController
         @level_options = (1..20)
     end
 
-    def character_owner
+    def character_owner?
         if logged_in?
             @character.user_id == current_user.id
         end

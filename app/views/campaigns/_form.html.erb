@@ -1,0 +1,15 @@
+<%= form_with model: @campaign do %>
+    <%= label_tag(:campaign_name, "Name" ) %>
+    <br>
+    <%= text_field(:campaign, :campaign_name) %>
+    <br>
+    <%= label_tag(:setting, "Setting") %>
+    <br>
+    <%= text_field(:campaign, :setting) %>
+    <br>
+    <%= label_tag(:min_level, "Minimum Level to Embark") %>
+    <br>
+    <%= select(:campaign, :min_level, @level_options) %>
+    <br>
+    <%= submit_tag @campaign.persisted? ? "Edit Campaign" : "Create Campaign" %>
+<% end %>
