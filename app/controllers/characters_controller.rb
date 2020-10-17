@@ -49,7 +49,13 @@ class CharactersController < ApplicationController
     end
 
     def index
-        @characters = Character.all
+        if params[:user_id]
+            @user = User.find_by_id(params[:user_id])
+            @characters = @user.characters
+        else
+            @characters = Character.all
+        end
+        
     end
 
     def show
@@ -80,6 +86,8 @@ class CharactersController < ApplicationController
     end
 
     def character_owner
-        @character.user_id == current_user.id
+        if logged_in?
+            @character.user_id == current_user.id
+        end
     end
 end

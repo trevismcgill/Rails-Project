@@ -3,12 +3,12 @@
 Characters - <% @user.characters.each do |c| %>
     <p><%= link_to "#{c.name}, the #{c.race} #{c.character_class}", character_path(c) %></p>
     <% end %>
-    <%= button_to "Create a Character", new_character_path %>
+    <%= button_to "Create a Character", new_character_path, method: "get" %>
     <br>
 Campaigns - <%= @user.campaigns.each do |c| %>
     <% end %>
     <br>
-    <%= button_to "Create a Campaign", new_campaign_path %>
+    <%= button_to "Create a Campaign", new_campaign_path, method: 'get' %>
 
 
 
