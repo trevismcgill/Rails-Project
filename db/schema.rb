@@ -16,6 +16,8 @@ ActiveRecord::Schema.define(version: 2020_10_15_181309) do
     t.string "campaign_name"
     t.string "setting"
     t.integer "min_level"
+    t.integer "user_id"
+    t.integer "character_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -25,8 +27,6 @@ ActiveRecord::Schema.define(version: 2020_10_15_181309) do
     t.string "character_class"
     t.string "race"
     t.integer "level"
-    t.integer "user_id"
-    t.integer "campaign_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

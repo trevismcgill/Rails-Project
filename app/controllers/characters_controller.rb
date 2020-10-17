@@ -15,7 +15,7 @@ class CharactersController < ApplicationController
         @character = Character.new(character_params)
         @character[:user_id] = current_user.id
         if @character.save
-            redirect_to user_character_path(current_user, @character)
+            # redirect_to user_character_path(current_user, @character)
         else
             flash.alert = @character.errors.full_messages
             redirect_to new_character_path
@@ -24,21 +24,21 @@ class CharactersController < ApplicationController
     
     def edit
         @character = Character.find_by_id(params[:id])
-        if character_owner
+        # if character_owner
             character_options
         else 
             flash.alert = "That is not your character!"
-            redirect_to user_characters_path(current_user)
+            # redirect_to user_characters_path(current_user)
         end
     end
 
     def update
         @character = Character.find_by_id(params[:id])
-        if character_owner
+        # if character_owner
             @character.assign_attributes(character_params)
             if @character.valid?
                 @character.update(character_params)
-                redirect_to user_character_path(current_user, @character)
+                # redirect_to user_character_path(current_user, @character)
             else
                 flash.alert = @character.errors.full_messages
             end
@@ -66,7 +66,7 @@ class CharactersController < ApplicationController
         @character = Character.find_by_id(params[:id])
         if character_owner
             @character.destroy
-            redirect_to user_characters_path(current_user)
+            # redirect_to user_characters_path(current_user)
         else
             flash.alert = "This is not your character!"
             redirect_to characters_path
