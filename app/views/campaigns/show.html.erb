@@ -11,7 +11,8 @@
     <p>Character Minimum Level to Join - <%= @campaign.min_level %></p>
     
 
-
+    <p>Join this Campaign?</p>
+    <%= button_to "Create a new Party Member", new_campaign_character_path(@campaign), method: :get %>
     <% if campaign_participant? %>
     <%= button_to 'Edit', { controller: :campaigns, action: :edit}, method: :get %>
 

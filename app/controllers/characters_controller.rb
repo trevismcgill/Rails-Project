@@ -3,8 +3,14 @@ class CharactersController < ApplicationController
     
     def new
         if logged_in?
-            @character = Character.new
-            character_options
+            if params[:campaign_id]
+                @character = Character.new
+                @character.campaign_id = params[:campaign_id]
+                character_options
+            else
+                @character = Character.new
+                character_options
+            end
         else
             flash.alert = "You must be logged in!"
             redirect_to login_path
