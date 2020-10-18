@@ -1,3 +1,5 @@
+<h4>Campaigns</h4>
+
 <% @campaigns.each do |c| %>
-    <h4><%= link_to "#{c.campaign_name}", campaign_path(c) %></h4>
+    <p><%= link_to "#{c.campaign_name}", campaign_path(c) %></p>
 <% end %>
