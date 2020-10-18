@@ -11,10 +11,12 @@
     <p>Character Minimum Level to Join - <%= @campaign.min_level %></p>
     
 
-    <p>Join this Campaign?</p>
-    <%= button_to "Create a new Party Member", new_campaign_character_path(@campaign), method: :get %>
+    
     <% if campaign_participant? %>
-    <%= button_to 'Edit', { controller: :campaigns, action: :edit}, method: :get %>
+        <%= button_to 'Edit', { controller: :campaigns, action: :edit}, method: :get %>
 
-    <%= button_to 'Destroy', { controller: :campaigns, action: :destroy}, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= button_to 'Destroy', { controller: :campaigns, action: :destroy}, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% else %>
+        <p>Join this Campaign?</p>
+        <%= button_to "Create a new Party Member", new_campaign_character_path(@campaign), method: :get %>
     <% end %>

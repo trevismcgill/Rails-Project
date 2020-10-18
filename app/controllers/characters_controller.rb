@@ -20,6 +20,8 @@ class CharactersController < ApplicationController
     def create
         @character = Character.new(character_params)
         @character[:user_id] = current_user.id
+        @campaign = Campaign.find_by_id(character_params[:campaign_id])
+        @character.can_join_campaign?
         if @character.save
             redirect_to user_character_path(current_user, @character)
         else
