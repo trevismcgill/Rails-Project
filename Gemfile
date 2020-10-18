@@ -49,5 +49,5 @@ gem 'dotenv-rails'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'bootstrap', '~> 5.0.0.alpha1'
 gem 'jquery-rails'
-gem 'rubocop'
-gem 'rubocop-rails'
+gem 'rubocop', '~> 0.93.1', require: false
+gem 'rubocop-rails', require: false
