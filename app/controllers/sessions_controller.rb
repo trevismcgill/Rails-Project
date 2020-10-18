@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
     def create
         if auth
             if @user = User.find_by(email: auth[:info][:email])
-                session[:user_id] = @user.id
+                set_session
                 redirect_to user_path(@user)
             else
                 @user = User.new
@@ -11,19 +11,26 @@ class SessionsController < ApplicationController
                 @user.username = auth[:info][:nickname]
                 @user.password = SecureRandom.hex
                 if @user.save
-                    session[:user_id] = @user.id
+                    set_session
                     redirect_to user_path(@user)
                 else
+                    flash.alert = @user.errors.full_messages
                     redirect_to login_path
                 end
             end
         else
             @user = User.find_by(email: params[:user][:email])
             if @user && @user.authenticate(params[:user][:password])
-                session[:user_id] = @user.id
+                set_session
                 redirect_to user_path(@user)
             else
-                redirect_to login_path
+                if @user == nil
+                    flash.alert = "There is no account with that email"
+                    redirect_to login_path
+                else
+                    flash.alert = "Your password was incorrect"
+                    redirect_to login_path
+                end
             end
         end
         
@@ -38,5 +45,9 @@ class SessionsController < ApplicationController
  
     def auth
         request.env['omniauth.auth']
+    end
+
+    def set_session
+        session[:user_id] = @user.id
     end
 end

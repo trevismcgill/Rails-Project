@@ -38,10 +38,14 @@
   
     <% if flash[:alert].kind_of?(Array) %>
       <% flash[:alert].each do |msg| %>
+      <div class="flash-alert">
         <h5><%= msg %></h5>
+      </div>
       <% end %>
     <% else %>
+    <div class="flash-alert">
       <h5><%= flash[:alert] %> </h5>
+    </div>
     <% end %>
 
 
