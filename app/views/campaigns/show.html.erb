@@ -1,0 +1,19 @@
+<h1><%= @campaign.campaign_name %></h1>
+
+    Setting - <%= @campaign.setting %>
+    <br>
+
+    <p>Characters - <% @campaign.characters.each do |c| %></p>
+        <ul><%= link_to "#{c.name}, the #{c.race} #{c.character_class}", character_path(c)%> played by <%=link_to c.user.username, user_path(c.user) %></ul>
+        <% end %>
+    <br>
+
+    <p>Character Minimum Level to Join - <%= @campaign.min_level %></p>
+    
+
+
+    <% if campaign_participant? %>
+    <%= button_to 'Edit', { controller: :campaigns, action: :edit}, method: :get %>
+
+    <%= button_to 'Destroy', { controller: :campaigns, action: :destroy}, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
