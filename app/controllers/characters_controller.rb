@@ -41,6 +41,7 @@ class CharactersController < ApplicationController
                 redirect_to user_character_path(current_user, @character)
             else
                 flash.alert = @character.errors.full_messages
+                redirect_to edit_character_path(@character)
             end
         else
             flash.alert = "This is not your character!"

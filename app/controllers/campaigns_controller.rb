@@ -27,7 +27,7 @@ class CampaignsController < ApplicationController
             campaign_options
         else 
             flash.alert = "That is not your campaign!"
-            redirect_to user_campaigns_path(current_user)
+            redirect_to campaigns_path
         end
     end
 
@@ -37,9 +37,10 @@ class CampaignsController < ApplicationController
             @campaign.assign_attributes(campaign_params)
             if @campaign.valid?
                 @campaign.update(campaign_params)
-                # redirect_to user_campaign_path(current_user, @campaign)
+                redirect_to campaign_path(@campaign)
             else
                 flash.alert = @campaign.errors.full_messages
+                redirect_to edit_campaign_path(@campaign)
             end
         else
             flash.alert = "This is not your campaign!"
@@ -64,7 +65,7 @@ class CampaignsController < ApplicationController
         @campaign = Campaign.find_by_id(params[:id])
         if campaign_participant?
             @campaign.destroy
-            # redirect_to campaign_character_path(current_user)
+            redirect_to user_path(current_user)
         else
             flash.alert = "This is not your campaign!"
             redirect_to campaigns_path
