@@ -5,10 +5,10 @@ Characters - <% @user.characters.each do |c| %>
     <% end %>
     <%= button_to "Create a Character", new_character_path, method: "get" %>
     <br>
-Campaigns - <%= @user.campaigns.each do |c| %>
-    <% end %>
-    <br>
-    <%= button_to "Create a Campaign", new_campaign_path, method: 'get' %>
 
+    Campaigns - <% @user.campaigns.uniq.each do |c| %>
+    <p><%= link_to c.campaign_name, campaign_path(c) %><p>
+    <% end %>
+    <%= button_to "Create a Campaign", new_campaign_path, method: 'get' %>
 
 

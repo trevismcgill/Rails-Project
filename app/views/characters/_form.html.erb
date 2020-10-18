@@ -15,5 +15,9 @@
     <br>
     <%= select(:character, :level, @level_options) %>
     <br>
+    <%= label_tag(:campaign, "Which campaign do you wish to join?") %>
+    <br>
+    <%= collection_select(:character, :campaign_id, Campaign.all, :id, :campaign_name) %>
+    <br>
     <%= submit_tag @character.persisted? ? "Edit Character" : "Create Character" %>
 <% end %>

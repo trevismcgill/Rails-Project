@@ -1,5 +1,5 @@
 class CharactersController < ApplicationController
-    helper_method :character_owner
+    helper_method :character_owner?
     
     def new
         if logged_in?
@@ -15,7 +15,7 @@ class CharactersController < ApplicationController
         @character = Character.new(character_params)
         @character[:user_id] = current_user.id
         if @character.save
-            # redirect_to user_character_path(current_user, @character)
+            redirect_to user_character_path(current_user, @character)
         else
             flash.alert = @character.errors.full_messages
             redirect_to new_character_path
@@ -24,21 +24,21 @@ class CharactersController < ApplicationController
     
     def edit
         @character = Character.find_by_id(params[:id])
-        # if character_owner?
+        if character_owner?
             character_options
         else 
             flash.alert = "That is not your character!"
-            # redirect_to user_characters_path(current_user)
+            redirect_to user_characters_path(current_user)
         end
     end
 
     def update
         @character = Character.find_by_id(params[:id])
-        # if character_owner?
+        if character_owner?
             @character.assign_attributes(character_params)
             if @character.valid?
                 @character.update(character_params)
-                # redirect_to user_character_path(current_user, @character)
+                redirect_to user_character_path(current_user, @character)
             else
                 flash.alert = @character.errors.full_messages
             end
@@ -63,9 +63,9 @@ class CharactersController < ApplicationController
 
     def destroy
         @character = Character.find_by_id(params[:id])
-        if character_owner
+        if character_owner?
             @character.destroy
-            # redirect_to user_characters_path(current_user)
+            redirect_to user_characters_path(current_user)
         else
             flash.alert = "This is not your character!"
             redirect_to characters_path
@@ -75,13 +75,17 @@ class CharactersController < ApplicationController
     private
 
     def character_params
-        params.require(:character).permit(:name, :race, :character_class, :level)
+        params.require(:character).permit(:name, :race, :character_class, :level, :campaign_id)
     end
 
     def character_options
         @race_options = ["Aasimar", "Dragonborn", "Dwarf", "Elf", "Gnome", "Halfing", "Half-Elf", "Half-Orc", "Human", "Orc", "Tiefling"]
         @class_options = ["Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Paladin", "Monk", "Ranger", "Rouge", "Sorceror", "Warlock", "Wizard" ]
         @level_options = (1..20)
+        @campaign_options = Campaign.all.collect do |c| 
+            c.campaign_name
+            c.id
+        end
     end
 
     def character_owner?
