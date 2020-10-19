@@ -4,6 +4,8 @@ class Character < ApplicationRecord
     validates :name, :race, :character_class, :level, presence: true
     validate :character_level_high_enough_to_join_campaign, on: :create
 
+    scope :character_class_filter, -> (query) { where("LOWER(character_class) LIKE ?", "#{query.downcase.singularize}") }
+
     
     def character_level_high_enough_to_join_campaign
         if !can_join_campaign?
@@ -12,6 +14,6 @@ class Character < ApplicationRecord
     end
 
     def can_join_campaign?
-      campaign_id? && level >= campaign.min_level.to_i
+      campaign_id? && level >= campaign.min_level
     end
 end

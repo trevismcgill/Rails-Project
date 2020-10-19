@@ -58,9 +58,19 @@ class CharactersController < ApplicationController
     end
 
     def index
-        if params[:user_id]
-            @user = User.find_by_id(params[:user_id])
-            @characters = @user.characters
+        character_options
+        binding.pry
+        if params[:user_id] || params[:campaign_id]
+            if params[:user_id]
+                @user = User.find_by_id(params[:user_id])                    
+                @characters = @user.characters
+            else
+                @campaign = Campaign.find_by_id(params[:campaign_id])
+                @characters = @campaign.characters
+            end
+        elsif params[:character_class]
+            @characters = Character.character_class_filter(params[:character_class])
+            binding.pry
         else
             @characters = Character.all
         end

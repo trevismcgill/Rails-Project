@@ -1,5 +1,14 @@
 <h4>Characters</h4>
+<%= form_with url: "characters/search/", method: "get", local: true do |f| %>
+  <%= f.label "Filter by:" %>
+  <%= select_tag(:character_class, options_for_select(@class_options)) %>
+  <%= f.submit "Filter" %>
+<% end %>
 
-<% @characters.each do |c| %>
-    <p><%= link_to "#{c.name}, the #{c.race} #{c.character_class}", character_path(c) %></p>
+<% if @characters.any? %>
+    <% @characters.each do |c| %>
+        <p><%= link_to "#{c.name}, the #{c.race} #{c.character_class}", character_path(c) %></p>
+    <% end %>
+<% else %>
+<p>There are no characters of that class</p>
 <% end %>

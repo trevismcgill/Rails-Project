@@ -1,6 +1,6 @@
 <h1>Hello <%= @user.username %>!</h1>
 
-Characters - <% @user.characters.each do |c| %>
+<%= link_to "My Characters", user_characters_path(@user) %> - <% @user.characters.each do |c| %>
     <p><%= link_to "#{c.name}, the #{c.race} #{c.character_class}", character_path(c) %></p>
     <% end %>
     <%= button_to "Create a Character", new_character_path, method: "get" %>

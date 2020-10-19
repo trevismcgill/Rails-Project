@@ -3,7 +3,7 @@
     Setting - <%= @campaign.setting %>
     <br>
 
-    <p>Characters - <% @campaign.characters.each do |c| %></p>
+    <p> <%= link_to "Characters", campaign_characters_path(@campaign) %>  - <% @campaign.characters.each do |c| %></p>
         <ul><%= link_to "#{c.name}, the #{c.race} #{c.character_class}", character_path(c)%> played by <%=link_to c.user.username, user_path(c.user) %></ul>
         <% end %>
     <br>

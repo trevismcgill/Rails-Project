@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get '/auth/github/callback', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
 
+  get '/characters/search/:character_class', to: 'characters#index'
+
 
 
 end
