@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get '/characters/search', to: 'characters#index'
   resources :users do
     resources :characters, only: [:index, :show]
   end
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
   get '/auth/github/callback', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
 
-  get '/characters/search/:character_class', to: 'characters#index'
+  
 
 
 

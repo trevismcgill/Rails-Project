@@ -59,7 +59,6 @@ class CharactersController < ApplicationController
 
     def index
         character_options
-        binding.pry
         if params[:user_id] || params[:campaign_id]
             if params[:user_id]
                 @user = User.find_by_id(params[:user_id])                    
@@ -70,7 +69,6 @@ class CharactersController < ApplicationController
             end
         elsif params[:character_class]
             @characters = Character.character_class_filter(params[:character_class])
-            binding.pry
         else
             @characters = Character.all
         end
