@@ -5,20 +5,16 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+Welcome to my third appilcation built for the Flatiron Software Engineering Program!
 
-* System dependencies
+This application, similar to my CLI project, was focused on D&D. The purpose of this app is to allow a user to create characters and campaigns to keep record of their D&D shenanigans!
 
-* Configuration
+* Built on Ruby version 2.6.1
 
-* Database creation
+# Getting Started
 
-* Database initialization
+Simply clone down the app and run `rails s` to boot a local server.
 
-* How to run the test suite
+Navigate to '/' to see the home page and proceed from there.
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Enjoy!
