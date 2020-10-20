@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     def create
         @user = User.create(user_params)
         if @user.id
+            set_session
             redirect_to user_path(@user)
         else
             flash.alert = @user.errors.full_messages

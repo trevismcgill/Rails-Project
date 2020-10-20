@@ -1,5 +1,5 @@
 <h4>Campaigns</h4>
 
-<% @campaigns.each do |c| %>
+<% @campaigns.uniq.each do |c| %>
     <p><%= link_to "#{c.campaign_name}", campaign_path(c) %></p>
 <% end %>

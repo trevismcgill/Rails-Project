@@ -46,8 +46,4 @@ class SessionsController < ApplicationController
     def auth
         request.env['omniauth.auth']
     end
-
-    def set_session
-        session[:user_id] = @user.id
-    end
 end

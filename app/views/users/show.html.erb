@@ -1,4 +1,4 @@
-<h1>Hello <%= @user.username %>!</h1>
+<h1>Hello, <%= @user.username %>!</h1>
 
 <%= link_to "My Characters", user_characters_path(@user) %> - <% @user.characters.each do |c| %>
     <p><%= link_to "#{c.name}, the #{c.race} #{c.character_class}", character_path(c) %></p>
@@ -6,7 +6,7 @@
     <%= button_to "Create a Character", new_character_path, method: "get" %>
     <br>
 
-    Campaigns - <% @user.campaigns.uniq.each do |c| %>
+    <%= link_to "My Campaigns", user_campaigns_path(@user) %> - <% @user.campaigns.uniq.each do |c| %>
     <p><%= link_to c.campaign_name, campaign_path(c) %><p>
     <% end %>
     <%= button_to "Create a Campaign", new_campaign_path, method: 'get' %>
