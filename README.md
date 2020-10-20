@@ -1,10 +1,5 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
 Welcome to my third appilcation built for the Flatiron Software Engineering Program!
 
 This application, similar to my CLI project, was focused on D&D. The purpose of this app is to allow a user to create characters and campaigns to keep record of their D&D shenanigans!
