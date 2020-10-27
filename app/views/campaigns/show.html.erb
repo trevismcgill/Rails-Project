@@ -1,9 +1,9 @@
 <h1><%= @campaign.campaign_name %></h1>
 
-    Setting - <%= @campaign.setting %>
+    <h3>Setting - </h3> <%= @campaign.setting %>
     <br>
 
-    <p> <%= link_to "Characters", campaign_characters_path(@campaign) %>  - <% @campaign.characters.each do |c| %></p>
+    <h3> <%= link_to "Characters", campaign_characters_path(@campaign) %>  -</h3> <% @campaign.characters.each do |c| %>
         <ul><%= link_to "#{c.name}, the #{c.race} #{c.character_class}", character_path(c)%> played by <%=link_to c.user.username, user_path(c.user) %></ul>
         <% end %>
     <br>

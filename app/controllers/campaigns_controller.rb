@@ -22,7 +22,7 @@ class CampaignsController < ApplicationController
     end
     
     def edit
-        @campaign = Campaign.find_by_id(params[:id])
+        @campaign = Campaign.find_by(:id => params[:id])
         if campaign_participant?
             campaign_options
         else 
@@ -32,7 +32,7 @@ class CampaignsController < ApplicationController
     end
 
     def update
-        @campaign = Campaign.find_by_id(params[:id])
+        @campaign = Campaign.find_by(:id => params[:id])
         if campaign_participant?
             @campaign.assign_attributes(campaign_params)
             if @campaign.valid?
@@ -50,7 +50,7 @@ class CampaignsController < ApplicationController
 
     def index
         if params[:user_id]
-            @user = User.find_by_id(params[:user_id])
+            @user = User.find_by(:id => params[:user_id])
             @campaigns = @user.campaigns
         else
             @campaigns = Campaign.all
@@ -58,11 +58,11 @@ class CampaignsController < ApplicationController
     end
 
     def show
-        @campaign = Campaign.find_by_id(params[:id])
+        @campaign = Campaign.find_by(:id => params[:id])
     end
 
     def destroy
-        @campaign = Campaign.find_by_id(params[:id])
+        @campaign = Campaign.find_by(:id => params[:id])
         if campaign_participant?
             @campaign.destroy
             redirect_to user_path(current_user)

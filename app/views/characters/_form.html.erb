@@ -1,19 +1,19 @@
-<%= form_with model: @character do %>
+<%= form_with model: @character, local: true do %>
     <%= label_tag(:name, "Name" ) %>
     <br>
     <%= text_field(:character, :name) %>
     <br>
     <%= label_tag(:race, "Race") %>
     <br>
-    <%= select(:character, :race, @race_options) %>
+    <%= select(:character, :race, Character.race_options) %>
     <br>
     <%= label_tag(:class, "Class") %>
     <br>
-    <%= select(:character, :character_class, @class_options) %>
+    <%= select(:character, :character_class, Character.class_options) %>
     <br>
     <%= label_tag(:level, "Level") %>
     <br>
-    <%= select(:character, :level, @level_options) %>
+    <%= select(:character, :level, Character.level_options) %>
     <br>
     <%= label_tag(:campaign, "Which campaign do you wish to join?") %>
     <br>

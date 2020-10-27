@@ -1,7 +1,7 @@
 <h4>Characters</h4>
 <%= form_with url: "/characters/search", method: "get", local: true do |f| %>
   <%= f.label "Filter by:" %>
-  <%= select_tag :character_class, options_for_select(@class_options) %>
+  <%= select_tag :character_class, options_for_select(Character.class_options) %>
   <%= f.submit "Filter" %>
 <% end %>
 

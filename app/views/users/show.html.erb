@@ -1,14 +1,17 @@
 <h1>Hello, <%= @user.username %>!</h1>
 
-<%= link_to "My Characters", user_characters_path(@user) %> - <% @user.characters.each do |c| %>
+<h2>My Characters -</h2>
+    <% @user.characters.each do |c| %>
     <p><%= link_to "#{c.name}, the #{c.race} #{c.character_class}", character_path(c) %></p>
     <% end %>
+    <%= button_to "My Characters", user_characters_path(@user), method: "get" %>
     <%= button_to "Create a Character", new_character_path, method: "get" %>
     <br>
-
-    <%= link_to "My Campaigns", user_campaigns_path(@user) %> - <% @user.campaigns.uniq.each do |c| %>
+<h2>My Campaigns -</h2>
+    <% @user.campaigns.uniq.each do |c| %>
     <p><%= link_to c.campaign_name, campaign_path(c) %><p>
     <% end %>
+    <%= button_to "My Campaigns", user_campaigns_path(@user), method: "get" %>
     <%= button_to "Create a Campaign", new_campaign_path, method: 'get' %>
 
 

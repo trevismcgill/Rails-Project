@@ -6,10 +6,8 @@ class CharactersController < ApplicationController
             if params[:campaign_id]
                 @character = Character.new
                 @character.campaign_id = params[:campaign_id]
-                character_options
             else
                 @character = Character.new
-                character_options
             end
         else
             flash.alert = "You must be logged in!"
@@ -18,30 +16,28 @@ class CharactersController < ApplicationController
     end
 
     def create
-        @character = Character.new(character_params)
-        @character[:user_id] = current_user.id
-        @campaign = Campaign.find_by_id(character_params[:campaign_id])
-        @character.can_join_campaign?
+        @character = current_user.characters.build(character_params)
+        binding.pry
+        # @character.can_join_campaign?
+        # binding.pry
         if @character.save
             redirect_to user_character_path(current_user, @character)
         else
-            flash.alert = @character.errors.full_messages
-            redirect_to new_character_path
+            flash.now[:alert] = @character.errors.full_messages
+            render :new
         end
     end
     
     def edit
-        @character = Character.find_by_id(params[:id])
-        if character_owner?
-            character_options
-        else 
+        @character = Character.find_by(:id => params[:id])
+        if !character_owner?
             flash.alert = "That is not your character!"
             redirect_to user_characters_path(current_user)
         end
     end
 
     def update
-        @character = Character.find_by_id(params[:id])
+        @character = Character.find_by(:id => params[:id])
         if character_owner?
             @character.assign_attributes(character_params)
             if @character.valid?
@@ -58,13 +54,12 @@ class CharactersController < ApplicationController
     end
 
     def index
-        character_options
         if params[:user_id] || params[:campaign_id]
             if params[:user_id]
-                @user = User.find_by_id(params[:user_id])                    
+                @user = User.find_by(:id => params[:user_id])                    
                 @characters = @user.characters
             else
-                @campaign = Campaign.find_by_id(params[:campaign_id])
+                @campaign = Campaign.find_by(:id => params[:campaign_id])
                 @characters = @campaign.characters
             end
         elsif params[:character_class]
@@ -75,11 +70,11 @@ class CharactersController < ApplicationController
     end
 
     def show
-        @character = Character.find_by_id(params[:id])
+        @character = Character.find_by(:id => params[:id])
     end
 
     def destroy
-        @character = Character.find_by_id(params[:id])
+        @character = Character.find_by(:id => params[:id])
         if character_owner?
             @character.destroy
             redirect_to user_characters_path(current_user)
@@ -93,16 +88,6 @@ class CharactersController < ApplicationController
 
     def character_params
         params.require(:character).permit(:name, :race, :character_class, :level, :campaign_id)
-    end
-
-    def character_options
-        @race_options = ["Aasimar", "Dragonborn", "Dwarf", "Elf", "Gnome", "Halfing", "Half-Elf", "Half-Orc", "Human", "Orc", "Tiefling"]
-        @class_options = ["Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Paladin", "Monk", "Ranger", "Rouge", "Sorceror", "Warlock", "Wizard" ]
-        @level_options = (1..20)
-        @campaign_options = Campaign.all.collect do |c| 
-            c.campaign_name
-            c.id
-        end
     end
 
     def character_owner?
